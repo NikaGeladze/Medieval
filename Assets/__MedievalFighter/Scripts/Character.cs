@@ -15,6 +15,7 @@ public class Character : MonoBehaviour
             switch (type) {
                 case PickType.Coin:
                     Debug.Log("Avige Coin");
+                    GameManager.Instance.CoinsAmount=temp.value;
                     Destroy(other.gameObject);
                     break;
                 case PickType.Gem:

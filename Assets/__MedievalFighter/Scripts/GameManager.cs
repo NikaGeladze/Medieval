@@ -22,7 +22,22 @@ public class GameManager : MonoBehaviour
 
     public Weapon currentWeapon;
     public World currentWorld;
+    [HideInInspector]
+    public UiManager ui_manager;
 
+    private int _coinsAmount = 0;
+
+    public int CoinsAmount {
+        get
+        {
+            return _coinsAmount;
+        }
+        set
+        {
+            _coinsAmount+= value;
+            ui_manager.AddCoin(_coinsAmount);
+        }
+    }
 
     public static GameManager Instance { set; get; }
     private void OnTriggerEnter(Collider other) {
@@ -30,7 +45,7 @@ public class GameManager : MonoBehaviour
     }
 
     private void Awake() {
-        if (Instance==null) {
+        if (Instance == null) {
             Instance = this;
         }
         else {
@@ -42,6 +57,7 @@ public class GameManager : MonoBehaviour
     void Start() {
         currentWeapon = weapons[Random.Range(0, weapons.Count)];
         LoadNextLevel();
+        ui_manager = GetComponent<UiManager>();
     }
 
 
