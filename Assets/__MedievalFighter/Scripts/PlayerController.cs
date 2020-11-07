@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Reset"))
         {
-          
+            Debug.Log("Reset");
         }
     }
 
