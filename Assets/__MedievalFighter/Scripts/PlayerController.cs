@@ -61,7 +61,6 @@ public class PlayerController : MonoBehaviour
             PlayerAnim.SetTrigger(Constants.JumpAnimTrig);
             PlayerAnim.ResetTrigger(Constants.IdleAnimTrig);
             PlayerAnim.ResetTrigger(Constants.MoveAnimTrig);
-            Debug.Log("Jump");
         }
     }
 
