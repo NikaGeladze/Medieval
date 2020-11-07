@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
+
+    public GameObject[] mySwords; //0 blue,1 red, 2 green
     
 
     private void OnTriggerEnter(Collider other) {
@@ -19,16 +21,28 @@ public class Character : MonoBehaviour
                     Debug.Log("Avige Gem");
                     Destroy(other.gameObject);
                     break;
-                case PickType.Health:
+                case PickType.BlueSword:
+                    mySwords[0].SetActive(true);
+                    mySwords[1].SetActive(false);
+                    mySwords[2].SetActive(false);
+                    Destroy(other.gameObject);
+                    Debug.Log("Blue");
                     break;
-                case PickType.Mana:
+                case PickType.RedSword:
+                    mySwords[1].SetActive(true);
+                    mySwords[0].SetActive(false);
+                    mySwords[2].SetActive(false);
+                    Destroy(other.gameObject);
+                    Debug.Log("Red");
                     break;
-                case PickType.Weapon:
+                case PickType.GreenSword:
+                    mySwords[2].SetActive(true);
+                    mySwords[0].SetActive(false);
+                    mySwords[1].SetActive(false);
+                    Destroy(other.gameObject);
+                    Debug.Log("Green");
                     break;
-                case PickType.Item:
-                    break;
-                default:
-                    break;
+          
             }
         }
     }

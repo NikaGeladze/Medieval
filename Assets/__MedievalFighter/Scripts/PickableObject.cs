@@ -18,5 +18,5 @@ public class PickableObject : MonoBehaviour
 }
 public enum PickType
 {
-    Coin, Gem, Health, Mana, Weapon, Item
+    Coin, Gem, Health, Mana, Item, BlueSword,RedSword,GreenSword
 }
