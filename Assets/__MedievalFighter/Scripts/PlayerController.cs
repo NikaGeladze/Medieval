@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class PlayerController : MonoBehaviour
     public Rigidbody PlayerRb;
 
     public float PlayerSpeed = 5f;
+
+    public PlayerAttack playerAttack;
 
     [HideInInspector]
     public Animator PlayerAnim;
@@ -71,6 +74,34 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Reset");
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.CompareTag(Constants.EnemyAttackTag))
+        {
+            PlayerDeath();
+        }
+        if(other.gameObject.CompareTag(Constants.EnemyTag))
+        {
+            other.gameObject.GetComponent<EnemyController>().Attack();
+        }
+    }
+
+    public void PlayerDeath()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    public void ActivateCollision()
+    {
+        playerAttack.ActivateCollison();
+    }
+
+    public void DeactivateCollision()
+    {
+        playerAttack.DeactivateCollision();
+    }
+   
 
     public void ResetPlayerPosition(Transform PlayerStartPos)
     {

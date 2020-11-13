@@ -1,59 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!65 &615963745
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2729406657434751753}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.3597704, y: 1.304641, z: 0.06932015}
-  m_Center: {x: -0.0000000022550433, y: 0.66795254, z: -0.00000019621923}
---- !u!114 &615963746
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2729406657434751753}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63d7c9d6dda265343927eac8da09b5d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentType: 7
-  value: 0
---- !u!65 &2084883004
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7097357961330744664}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.35977045, y: 1.3046409, z: 0.069320194}
-  m_Center: {x: -0.0000000099532755, y: 0.6679526, z: -0.000000063926905}
---- !u!114 &2084883005
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7097357961330744664}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63d7c9d6dda265343927eac8da09b5d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentType: 5
-  value: 0
 --- !u!65 &1185053759
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -176,6 +122,33 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &615963745
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2729406657434751753}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.3597704, y: 1.304641, z: 0.06932015}
+  m_Center: {x: -0.0000000022550433, y: 0.66795254, z: -0.00000019621923}
+--- !u!114 &615963746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2729406657434751753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63d7c9d6dda265343927eac8da09b5d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentType: 7
+  value: 0
 --- !u!1 &4123830930977328755
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,6 +233,33 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!65 &2084883004
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7097357961330744664}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.35977045, y: 1.3046409, z: 0.069320194}
+  m_Center: {x: -0.0000000099532755, y: 0.6679526, z: -0.000000063926905}
+--- !u!114 &2084883005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7097357961330744664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63d7c9d6dda265343927eac8da09b5d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentType: 5
+  value: 0
 --- !u!1001 &121816491
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -418,6 +418,10 @@ PrefabInstance:
     - target: {fileID: 2729406657147422628, guid: 1211c9553bbe12843a6000f0eec751fb, type: 3}
       propertyPath: m_Name
       value: SwordGreenPickable
+      objectReference: {fileID: 0}
+    - target: {fileID: 2729406657147422628, guid: 1211c9553bbe12843a6000f0eec751fb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3362812643875986718, guid: 1211c9553bbe12843a6000f0eec751fb, type: 3}
       propertyPath: m_RootOrder
@@ -762,6 +766,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SwordBluePickable
       objectReference: {fileID: 0}
+    - target: {fileID: 7097357960396742544, guid: 4369a765640965f4f8c20083dc1b17ac, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7581020363133109546, guid: 4369a765640965f4f8c20083dc1b17ac, type: 3}
       propertyPath: m_RootOrder
       value: 50
@@ -1074,6 +1082,10 @@ PrefabInstance:
     - target: {fileID: 403005011871758412, guid: 89e6e236b8ef6b843b499b9f61b20a2d, type: 3}
       propertyPath: m_Name
       value: SwordRedPickable
+      objectReference: {fileID: 0}
+    - target: {fileID: 403005011871758412, guid: 89e6e236b8ef6b843b499b9f61b20a2d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1070750881082843894, guid: 89e6e236b8ef6b843b499b9f61b20a2d, type: 3}
       propertyPath: m_RootOrder

@@ -20,6 +20,7 @@ public class Character : MonoBehaviour
                     break;
                 case PickType.Gem:
                     Debug.Log("Avige Gem");
+                    GameManager.Instance.CoinsAmount = temp.value;
                     Destroy(other.gameObject);
                     break;
                 case PickType.BlueSword:

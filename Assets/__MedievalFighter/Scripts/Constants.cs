@@ -11,6 +11,10 @@ public static class Constants
     public static string JumpAnimTrig = "Jump";
     public static string MoveAnimTrig = "Run";
     public static string AttackAnimTrig = "Attack";
+    public static string EnemyTag = "Enemy";
+    public static string PlayerAttackTag = "PlayerAttack";
+    public static string PlayerTag = "Player";
+    public static string EnemyAttackTag = "EnemyAttack";
 
 
     //Pickables

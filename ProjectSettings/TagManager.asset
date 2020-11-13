@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Portal
   - Reset
+  - Enemy
+  - PlayerAttack
+  - EnemyAttack
   layers:
   - Default
   - TransparentFX
