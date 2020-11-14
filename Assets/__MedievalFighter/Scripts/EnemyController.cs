@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
 
-    public EnemyAttack enemyAttack;
+    public BoxCollider enemyAttackCollider;
 
     public Animator enemyAnimator;
 
@@ -30,12 +30,12 @@ public class EnemyController : MonoBehaviour
 
     public void ActivateCollision()
     {
-        enemyAttack.ActivateCollison();
+        enemyAttackCollider.enabled = true;
     }
 
     public void DeactivateCollision()
     {
-        enemyAttack.DeactivateCollision();
+        enemyAttackCollider.enabled= false;
     }
 
     public void Death()
