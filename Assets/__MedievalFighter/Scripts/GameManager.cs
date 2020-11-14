@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
 
     private int _coinsAmount = 0;
 
+    public Character myCharacter;
     public int CoinsAmount {
         get
         {
@@ -74,7 +75,9 @@ public class GameManager : MonoBehaviour
         currentLvl = Instantiate(levels[Random.Range(0, levels.Count)]);
         GetRandomColor();
     }
-
+    public void UpdateHealth() {
+        ui_manager.ChangeHealthUI(myCharacter.currentHealth);
+    }
     private void Update() {
         if (Input.GetKeyDown(KeyCode.RightArrow)) {
             LoadNextLevel();

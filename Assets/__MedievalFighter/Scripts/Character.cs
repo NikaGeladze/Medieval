@@ -1,10 +1,19 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Character : MonoBehaviour
 {
+    public float Totalhealth;
 
+    [HideInInspector]
+    public float currentHealth;
+
+
+    private void Start() {
+        currentHealth = Totalhealth;
+    }
     public GameObject[] mySwords; //0 blue,1 red, 2 green
     
 
@@ -47,5 +56,10 @@ public class Character : MonoBehaviour
           
             }
         }
+    }
+
+    internal void TakeDamage(float damage) {
+        currentHealth -= damage;
+        GameManager.Instance.UpdateHealth();
     }
 }

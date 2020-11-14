@@ -77,19 +77,19 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.CompareTag(Constants.EnemyAttackTag))
-        {
-            PlayerDeath();
+        if (other.gameObject.CompareTag(Constants.EnemyAttackTag)) {
+            PlayerHasBeenAttacked(other.transform.parent.gameObject.GetComponent<EnemyController>().damage);
+            Debug.LogError("Sheteva"); 
         }
-        if(other.gameObject.CompareTag(Constants.EnemyTag))
-        {
+        if (other.gameObject.CompareTag(Constants.EnemyTag)) {
             other.gameObject.GetComponent<EnemyController>().Attack();
         }
     }
 
-    public void PlayerDeath()
+    public void PlayerHasBeenAttacked(float damage)
     {
-        SceneManager.LoadScene(0);
+        GameManager.Instance.myCharacter.TakeDamage(damage);
+
     }
 
     public void ActivateCollision()

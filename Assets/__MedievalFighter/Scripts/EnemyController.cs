@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-
+    public float damage;
     public BoxCollider enemyAttackCollider;
-
     public Animator enemyAnimator;
 
     private void Start()
