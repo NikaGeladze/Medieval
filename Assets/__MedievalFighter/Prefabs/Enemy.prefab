@@ -447,6 +447,50 @@ Transform:
   m_Father: {fileID: 5656580181663112242}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 70.9509, y: 8.116764, z: 169.60033}
+--- !u!1 &3105283214264193538
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 476070768431314461}
+  - component: {fileID: 1895157355934650778}
+  m_Layer: 0
+  m_Name: DashTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &476070768431314461
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3105283214264193538}
+  m_LocalRotation: {x: -0, y: -0.55515224, z: 0, w: 0.8317487}
+  m_LocalPosition: {x: 1.8181802, y: 2.1199834, z: -1.2403238}
+  m_LocalScale: {x: 0.62500006, y: 0.625, z: 0.62500006}
+  m_Children: []
+  m_Father: {fileID: 8926960789374721045}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1895157355934650778
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3105283214264193538}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.546503, y: 3.1781683, z: 5.1605926}
+  m_Center: {x: -2.220663, y: -1.0890841, z: 3.466388}
 --- !u!1 &3203488757320424657
 GameObject:
   m_ObjectHideFlags: 0
@@ -1061,6 +1105,7 @@ Transform:
   - {fileID: 2128806757203381022}
   - {fileID: 1284431954834929937}
   - {fileID: 931322517}
+  - {fileID: 476070768431314461}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 67.442, z: 0}
@@ -1106,8 +1151,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df59fbfdd9570a948bafa799629d15b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 0
   enemyAttackCollider: {fileID: 931322519}
   enemyAnimator: {fileID: 7891005701634895231}
+  Enemytype: 0
 --- !u!65 &6157461583080302141
 BoxCollider:
   m_ObjectHideFlags: 0

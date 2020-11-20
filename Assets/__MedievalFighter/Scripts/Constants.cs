@@ -15,6 +15,7 @@ public static class Constants
     public static string PlayerAttackTag = "PlayerAttack";
     public static string PlayerTag = "Player";
     public static string EnemyAttackTag = "EnemyAttack";
+    public static string DashTag = "Dash";
 
 
     //Pickables

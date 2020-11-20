@@ -7,10 +7,14 @@ public class EnemyController : MonoBehaviour
     public float damage;
     public BoxCollider enemyAttackCollider;
     public Animator enemyAnimator;
+    public enemyType Enemytype;
+
+    private Rigidbody rb;
 
     private void Start()
     {
         enemyAnimator.SetTrigger(Constants.IdleAnimTrig);
+        rb = GetComponent<Rigidbody>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -37,9 +41,25 @@ public class EnemyController : MonoBehaviour
         enemyAttackCollider.enabled= false;
     }
 
+    public void Dash(Transform playerPos)
+    {
+        if (Enemytype == enemyType.DASH)
+        {
+            enemyAnimator.SetTrigger(Constants.DashTag);
+
+            rb.velocity = new Vector3(playerPos.position.x - transform.position.x,0,0);
+        }
+    }
+
+
     public void Death()
     {
         Destroy(gameObject);
+    }
+
+    public enum enemyType
+    { 
+        IDLE,DASH
     }
 
 }

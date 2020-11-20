@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
 
     public PlayerAttack playerAttack;
 
+
     [HideInInspector]
     public Animator PlayerAnim;
 
@@ -83,6 +84,23 @@ public class PlayerController : MonoBehaviour
         }
         if (other.gameObject.CompareTag(Constants.EnemyTag)) {
             other.gameObject.GetComponent<EnemyController>().Attack();
+        }
+    
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.CompareTag(Constants.DashTag))
+        {
+            other.gameObject.transform.parent.GetComponent<EnemyController>().Dash(transform);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag(Constants.DashTag))
+        {
+            other.gameObject.transform.parent.GetComponent<EnemyController>().enemyAnimator.SetTrigger(Constants.IdleAnimTrig);
         }
     }
 
