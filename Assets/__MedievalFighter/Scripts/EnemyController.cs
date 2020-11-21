@@ -9,6 +9,10 @@ public class EnemyController : MonoBehaviour
     public Animator enemyAnimator;
     public enemyType Enemytype;
 
+    public GameObject regdoll;
+    public Rigidbody middleSpine;
+
+
     private Rigidbody rb;
 
     private void Start()
@@ -54,6 +58,10 @@ public class EnemyController : MonoBehaviour
 
     public void Death()
     {
+        //Destroy(gameObject);
+        regdoll.SetActive(true);
+        regdoll.transform.SetParent(null);
+        middleSpine.AddForce(new Vector3(Random.Range(0,3), Random.Range(0, 3f), Random.Range(0, 3f)), ForceMode.Impulse);
         Destroy(gameObject);
     }
 
