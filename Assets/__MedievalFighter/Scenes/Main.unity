@@ -663,6 +663,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4123830930977328754, guid: ae0106239ce07ab4090294c42bce1f42, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4123830930977328754, guid: ae0106239ce07ab4090294c42bce1f42, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -672,6 +676,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4123830930977328754, guid: ae0106239ce07ab4090294c42bce1f42, type: 3}
       propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4123830930977328754, guid: ae0106239ce07ab4090294c42bce1f42, type: 3}
+      propertyPath: m_LocalRotation.w
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4123830930977328754, guid: ae0106239ce07ab4090294c42bce1f42, type: 3}
@@ -685,14 +693,6 @@ PrefabInstance:
     - target: {fileID: 4123830930977328754, guid: ae0106239ce07ab4090294c42bce1f42, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4123830930977328754, guid: ae0106239ce07ab4090294c42bce1f42, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4123830930977328754, guid: ae0106239ce07ab4090294c42bce1f42, type: 3}
-      propertyPath: m_RootOrder
-      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4123830930977328754, guid: ae0106239ce07ab4090294c42bce1f42, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1499,19 +1499,19 @@ MonoBehaviour:
     timeToTravel: 0
   buttons:
   - Btn: {fileID: 1196189486}
-    isUsed: 0
+    isAvialable: 0
     totalAmountTxt: {fileID: 1177862944}
     healthValue: 0
     itemAmount: 0
     myButtonState: 3
   - Btn: {fileID: 1552142861}
-    isUsed: 0
+    isAvialable: 0
     totalAmountTxt: {fileID: 850309777}
     healthValue: 0
     itemAmount: 0
     myButtonState: 3
   - Btn: {fileID: 17943019}
-    isUsed: 0
+    isAvialable: 0
     totalAmountTxt: {fileID: 773311194}
     healthValue: 0
     itemAmount: 0
@@ -1944,6 +1944,10 @@ PrefabInstance:
       value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 450056070589191351, guid: 988a7ab2121571147871eaa3542d89de, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 450056070589191351, guid: 988a7ab2121571147871eaa3542d89de, type: 3}
       propertyPath: m_LocalPosition.x
       value: -23.78
       objectReference: {fileID: 0}
@@ -1956,6 +1960,10 @@ PrefabInstance:
       value: 8.85
       objectReference: {fileID: 0}
     - target: {fileID: 450056070589191351, guid: 988a7ab2121571147871eaa3542d89de, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 450056070589191351, guid: 988a7ab2121571147871eaa3542d89de, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
@@ -1966,14 +1974,6 @@ PrefabInstance:
     - target: {fileID: 450056070589191351, guid: 988a7ab2121571147871eaa3542d89de, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 450056070589191351, guid: 988a7ab2121571147871eaa3542d89de, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 450056070589191351, guid: 988a7ab2121571147871eaa3542d89de, type: 3}
-      propertyPath: m_RootOrder
-      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 450056070589191351, guid: 988a7ab2121571147871eaa3542d89de, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

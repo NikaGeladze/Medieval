@@ -3,40 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.XR.WSA;
+using System.Xml;
+using System.Xml.Serialization;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 public class GameManager : MonoBehaviour
 {
     [Header("References")]
-    public Character myCharacter; 
-
+    public Character myCharacter;
     [HideInInspector]
     public UiManager ui_manager;
-
     public List<LevelData> levelInfo;
     public List<GameObject> levels;
-
     public Material playerMat;
     public Material groundMat;
     public Material cubesMat;
     public Text LevelLength;
     public Text playerID;
     public GameObject currentLvl;
-
     public List<World> worlds;
     public List<Weapon> weapons;
-
-
     public Weapon currentWeapon;
     public World currentWorld;
-   
-
     private int _coinsAmount = 0;
-
-
-
     [Space(30)]
     public List<InventoryButton> buttons;
 
+
+    public Data gameData;
     public int CoinsAmount {
         get
         {
@@ -44,7 +39,7 @@ public class GameManager : MonoBehaviour
         }
         set
         {
-            _coinsAmount+= value;
+            _coinsAmount += value;
             ui_manager.AddCoin(_coinsAmount);
         }
     }
@@ -68,6 +63,7 @@ public class GameManager : MonoBehaviour
         currentWeapon = weapons[Random.Range(0, weapons.Count)];
         LoadNextLevel();
         ui_manager = GetComponent<UiManager>();
+        gameData = new Data();
     }
 
 
@@ -86,16 +82,12 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void ButtonClicked(int buttonID)
-    {
-        if(!buttons[buttonID].isUsed)
-        {
+    public void ButtonClicked(int buttonID) {
+        if (!buttons[buttonID].isAvialable) {
             Debug.Log("There is no item in that slot");
         }
-        else if(buttons[buttonID].isUsed)
-        {
-            switch (buttons[buttonID].myButtonState)
-            {
+        else if (buttons[buttonID].isAvialable) {
+            switch (buttons[buttonID].myButtonState) {
                 case buttonState.REDSWORD:
                     myCharacter.ChangeSword(true);
                     break;
@@ -104,43 +96,36 @@ public class GameManager : MonoBehaviour
                     myCharacter.ChangeSword(false);
                     break;
                 case buttonState.HEALTH:
-                    myCharacter.ChangeHealthValue(buttons[buttonID].healthValue,true);
+                    myCharacter.ChangeHealthValue(buttons[buttonID].healthValue, true);
                     buttons[buttonID].itemAmount -= 1;
                     buttons[buttonID].totalAmountTxt.text = buttons[buttonID].itemAmount.ToString();
                     break;
             }
-            if(buttons[buttonID].itemAmount <= 0)
-            {
+            if (buttons[buttonID].itemAmount <= 0) {
                 Color temp = buttons[buttonID].Btn.GetComponent<Image>().color;
                 temp = new Color(temp.r, temp.g, temp.b, 0.1f);
                 buttons[buttonID].Btn.GetComponent<Image>().sprite = null;
-                buttons[buttonID].isUsed = false;
+                buttons[buttonID].isAvialable = false;
                 buttons[buttonID].myButtonState = buttonState.NOTHING;
                 buttons[buttonID].Btn.GetComponent<Image>().color = temp;
             }
         }
     }
-    public void ChangeButtonState(buttonState state,Sprite buttonSprite,float healthAmount)
-    {
-        for(int i = 0;i != buttons.Count;i++)
-        {
-            for (int a = 0; a != buttons.Count; a++)
-            {
-                if (buttons[a].isUsed == true && buttons[a].myButtonState == state && buttons[a].itemAmount > 0 && healthAmount == buttons[a].healthValue)
-                {
+    public void AddToInventory(buttonState state, Sprite buttonSprite, float healthAmount) {
+        for (int i = 0; i != buttons.Count; i++) {                     //amas rame movuxerxot
+            for (int a = 0; a != buttons.Count; a++) {
+                if (buttons[a].isAvialable == true && buttons[a].myButtonState == state && buttons[a].itemAmount > 0 && healthAmount == buttons[a].healthValue) {
                     buttons[a].itemAmount += 1;
                     buttons[a].totalAmountTxt.text = buttons[a].itemAmount.ToString();
                     buttons[a].healthValue = healthAmount;
                     return;
                 }
-
             }
-            if (buttons[i].isUsed == false)
-            {
+            if (buttons[i].isAvialable == false) {
                 Color temp = buttons[i].Btn.GetComponent<Image>().color;
                 temp = new Color(temp.r, temp.g, temp.b, 1f);
-                Debug.Log(buttons[i].isUsed);
-                buttons[i].isUsed = true;
+                Debug.Log(buttons[i].isAvialable);
+                buttons[i].isAvialable = true;
                 buttons[i].myButtonState = state;
                 buttons[i].Btn.GetComponent<Image>().sprite = buttonSprite;
                 buttons[i].Btn.GetComponent<Image>().color = temp;
@@ -148,20 +133,17 @@ public class GameManager : MonoBehaviour
                 buttons[i].totalAmountTxt.text = buttons[i].itemAmount.ToString();
                 buttons[i].healthValue = healthAmount;
                 return;
-                
+
             }
-          
+
         }
     }
 
-    public bool CheckForSameButton(buttonState state, float healthAmount)
-    {
+    public bool CheckForSameButton(buttonState state, float healthAmount) {
         int index = 0;
         bool finalResult = false;
-        for (int i = 0;i != buttons.Count; i++)
-        {
-            if (buttons[i].isUsed == true && buttons[i].myButtonState == state && buttons[i].itemAmount > 0 && healthAmount == buttons[i].healthValue)
-            {
+        for (int i = 0; i != buttons.Count; i++) {
+            if (buttons[i].isAvialable == true && buttons[i].myButtonState == state && buttons[i].itemAmount > 0 && healthAmount == buttons[i].healthValue) {
                 finalResult = true;
                 index = i;
             }
@@ -190,12 +172,6 @@ public class GameManager : MonoBehaviour
     {
         sword, spear, axe, hand, horse
     }
-
-  
-
-
-
-
     [System.Serializable]
     public class World
     {
@@ -218,7 +194,7 @@ public class GameManager : MonoBehaviour
     public class InventoryButton
     {
         public Button Btn;
-        public bool isUsed;
+        public bool isAvialable;
         public Text totalAmountTxt;
         public float healthValue;
         public float itemAmount;
@@ -228,6 +204,55 @@ public class GameManager : MonoBehaviour
     [System.Serializable]
     public enum buttonState
     {
-        REDSWORD, GREENSWORD, HEALTH,NOTHING
+        REDSWORD, GREENSWORD, HEALTH, NOTHING
+    }
+
+
+    [System.Serializable]
+    public class Data
+    {
+        public int coinsAmount;
+        public float currentHealthAmount;
+        public int lvlID;
+        //racewereba araaq mnishvneloba
+    }
+
+
+    [ContextMenu("SaveChecker")]
+    public void CheckSave() {
+        gameData.coinsAmount = 666;
+        gameData.currentHealthAmount = 111;
+        gameData.lvlID = 17;
+
+        SaveGameInformation();
+    }
+
+    
+
+
+    public void SaveGameInformation() {
+        XmlSerializer xmlSer = new XmlSerializer(typeof(Data));
+        using (StringWriter sw= new StringWriter()) {
+            xmlSer.Serialize(sw, gameData);
+            // Debug.Log(sw.ToString());
+            PlayerPrefs.SetString("Data", sw.ToString());
+        }
+    }
+
+    [ContextMenu("GetData")]
+
+    public void LoadGameInformation() {
+        XmlSerializer xmlSer = new XmlSerializer(typeof(Data));
+        string entireText = PlayerPrefs.GetString("Data");
+        if (entireText.Length==0) {
+            gameData = new Data();
+        }
+        else {
+            using(var reader=new System.IO.StringReader(entireText)) {
+                gameData = xmlSer.Deserialize(reader) as Data;
+            }
+        }
+
+        Debug.Log(gameData.coinsAmount + "------" + gameData.currentHealthAmount + "health            " + gameData.lvlID);
     }
 }
