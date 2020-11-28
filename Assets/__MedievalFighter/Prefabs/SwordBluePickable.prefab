@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7581020363133109546}
   - component: {fileID: 6817018615120939663}
   - component: {fileID: 8754466637791542853}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: SwordBluePickable
   m_TagString: Untagged
   m_Icon: {fileID: 0}

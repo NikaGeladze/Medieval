@@ -80,7 +80,6 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag(Constants.EnemyAttackTag)) {
             PlayerHasBeenAttacked(other.transform.parent.gameObject.GetComponent<EnemyController>().damage);
-            Debug.LogError("Sheteva"); 
         }
         if (other.gameObject.CompareTag(Constants.EnemyTag)) {
             other.gameObject.GetComponent<EnemyController>().Attack();
@@ -106,7 +105,7 @@ public class PlayerController : MonoBehaviour
 
     public void PlayerHasBeenAttacked(float damage)
     {
-        GameManager.Instance.myCharacter.TakeDamage(damage);
+        GameManager.Instance.myCharacter.ChangeHealthValue(damage,false);
 
     }
 

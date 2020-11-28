@@ -6,6 +6,12 @@ using UnityEngine.XR.WSA;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("References")]
+    public Character myCharacter; 
+
+    [HideInInspector]
+    public UiManager ui_manager;
+
     public List<LevelData> levelInfo;
     public List<GameObject> levels;
 
@@ -22,12 +28,15 @@ public class GameManager : MonoBehaviour
 
     public Weapon currentWeapon;
     public World currentWorld;
-    [HideInInspector]
-    public UiManager ui_manager;
+   
 
     private int _coinsAmount = 0;
 
-    public Character myCharacter;
+
+
+    [Space(30)]
+    public List<InventoryButton> buttons;
+
     public int CoinsAmount {
         get
         {
@@ -75,6 +84,92 @@ public class GameManager : MonoBehaviour
         currentLvl = Instantiate(levels[Random.Range(0, levels.Count)]);
         GetRandomColor();
     }
+
+
+    public void ButtonClicked(int buttonID)
+    {
+        if(!buttons[buttonID].isUsed)
+        {
+            Debug.Log("There is no item in that slot");
+        }
+        else if(buttons[buttonID].isUsed)
+        {
+            switch (buttons[buttonID].myButtonState)
+            {
+                case buttonState.REDSWORD:
+                    myCharacter.ChangeSword(true);
+                    break;
+
+                case buttonState.GREENSWORD:
+                    myCharacter.ChangeSword(false);
+                    break;
+                case buttonState.HEALTH:
+                    myCharacter.ChangeHealthValue(buttons[buttonID].healthValue,true);
+                    buttons[buttonID].itemAmount -= 1;
+                    buttons[buttonID].totalAmountTxt.text = buttons[buttonID].itemAmount.ToString();
+                    break;
+            }
+            if(buttons[buttonID].itemAmount <= 0)
+            {
+                Color temp = buttons[buttonID].Btn.GetComponent<Image>().color;
+                temp = new Color(temp.r, temp.g, temp.b, 0.1f);
+                buttons[buttonID].Btn.GetComponent<Image>().sprite = null;
+                buttons[buttonID].isUsed = false;
+                buttons[buttonID].myButtonState = buttonState.NOTHING;
+                buttons[buttonID].Btn.GetComponent<Image>().color = temp;
+            }
+        }
+    }
+    public void ChangeButtonState(buttonState state,Sprite buttonSprite,float healthAmount)
+    {
+        for(int i = 0;i != buttons.Count;i++)
+        {
+            for (int a = 0; a != buttons.Count; a++)
+            {
+                if (buttons[a].isUsed == true && buttons[a].myButtonState == state && buttons[a].itemAmount > 0 && healthAmount == buttons[a].healthValue)
+                {
+                    buttons[a].itemAmount += 1;
+                    buttons[a].totalAmountTxt.text = buttons[a].itemAmount.ToString();
+                    buttons[a].healthValue = healthAmount;
+                    return;
+                }
+
+            }
+            if (buttons[i].isUsed == false)
+            {
+                Color temp = buttons[i].Btn.GetComponent<Image>().color;
+                temp = new Color(temp.r, temp.g, temp.b, 1f);
+                Debug.Log(buttons[i].isUsed);
+                buttons[i].isUsed = true;
+                buttons[i].myButtonState = state;
+                buttons[i].Btn.GetComponent<Image>().sprite = buttonSprite;
+                buttons[i].Btn.GetComponent<Image>().color = temp;
+                buttons[i].itemAmount += 1;
+                buttons[i].totalAmountTxt.text = buttons[i].itemAmount.ToString();
+                buttons[i].healthValue = healthAmount;
+                return;
+                
+            }
+          
+        }
+    }
+
+    public bool CheckForSameButton(buttonState state, float healthAmount)
+    {
+        int index = 0;
+        bool finalResult = false;
+        for (int i = 0;i != buttons.Count; i++)
+        {
+            if (buttons[i].isUsed == true && buttons[i].myButtonState == state && buttons[i].itemAmount > 0 && healthAmount == buttons[i].healthValue)
+            {
+                finalResult = true;
+                index = i;
+            }
+
+        }
+        return finalResult;
+    }
+
     public void UpdateHealth() {
         ui_manager.ChangeHealthUI(myCharacter.currentHealth);
     }
@@ -95,6 +190,8 @@ public class GameManager : MonoBehaviour
     {
         sword, spear, axe, hand, horse
     }
+
+  
 
 
 
@@ -117,5 +214,20 @@ public class GameManager : MonoBehaviour
         public int lvl;
     }
 
+    [System.Serializable]
+    public class InventoryButton
+    {
+        public Button Btn;
+        public bool isUsed;
+        public Text totalAmountTxt;
+        public float healthValue;
+        public float itemAmount;
+        public buttonState myButtonState;
+    }
 
+    [System.Serializable]
+    public enum buttonState
+    {
+        REDSWORD, GREENSWORD, HEALTH,NOTHING
+    }
 }

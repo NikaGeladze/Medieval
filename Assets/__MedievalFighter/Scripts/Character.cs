@@ -23,43 +23,55 @@ public class Character : MonoBehaviour
             PickType type = temp.ReturnMyType();
             switch (type) {
                 case PickType.Coin:
-                    Debug.Log("Avige Coin");
                     GameManager.Instance.CoinsAmount=temp.value;
                     Destroy(other.gameObject);
                     break;
                 case PickType.Gem:
-                    Debug.Log("Avige Gem");
                     GameManager.Instance.CoinsAmount = temp.value;
                     Destroy(other.gameObject);
                     break;
-                case PickType.BlueSword:
-                    mySwords[0].SetActive(true);
-                    mySwords[1].SetActive(false);
-                    mySwords[2].SetActive(false);
+                case PickType.RedSwordUI:
+                    GameManager.Instance.ChangeButtonState(GameManager.buttonState.REDSWORD,GameManager.Instance.ui_manager.buttonSprites.redSwordSprite,temp.value);
                     Destroy(other.gameObject);
-                    Debug.Log("Blue");
                     break;
-                case PickType.RedSword:
-                    mySwords[1].SetActive(true);
-                    mySwords[0].SetActive(false);
-                    mySwords[2].SetActive(false);
+                case PickType.GreenSwordUI:
+                    GameManager.Instance.ChangeButtonState(GameManager.buttonState.GREENSWORD, GameManager.Instance.ui_manager.buttonSprites.greenSwordSprite, temp.value);
                     Destroy(other.gameObject);
-                    Debug.Log("Red");
                     break;
-                case PickType.GreenSword:
-                    mySwords[2].SetActive(true);
-                    mySwords[0].SetActive(false);
-                    mySwords[1].SetActive(false);
+                case PickType.HealthUI:
+                    GameManager.Instance.ChangeButtonState(GameManager.buttonState.HEALTH, GameManager.Instance.ui_manager.buttonSprites.healthSprite, temp.value);
                     Destroy(other.gameObject);
-                    Debug.Log("Green");
                     break;
-          
+                case PickType.FakeHealth:
+                    ChangeHealthValue(temp.value, false);
+                    Destroy(other.gameObject);
+                    break;
+                case PickType.Health:
+                    ChangeHealthValue(temp.value, true);
+                    Destroy(other.gameObject);
+                    break;
             }
         }
     }
 
-    internal void TakeDamage(float damage) {
-        currentHealth -= damage;
+    public void ChangeHealthValue(float amount,bool wantToIncrease) {
+        currentHealth = wantToIncrease ? currentHealth + amount : currentHealth - amount;
         GameManager.Instance.UpdateHealth();
+    }
+
+    public void ChangeSword(bool red)
+    {
+        if(red)
+        {
+            mySwords[1].SetActive(true);
+            mySwords[0].SetActive(false);
+            mySwords[2].SetActive(false);
+        }
+        else
+        {
+            mySwords[2].SetActive(true);
+            mySwords[0].SetActive(false);
+            mySwords[1].SetActive(false);
+        }
     }
 }

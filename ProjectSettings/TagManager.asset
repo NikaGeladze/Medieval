@@ -21,10 +21,10 @@ TagManager:
   - 
   - Portal
   - Detector
-  - 
-  - 
-  - 
-  - 
+  - Ragdoll
+  - Character
+  - PlayerAttackTrig
+  - Pickable
   - 
   - 
   - 

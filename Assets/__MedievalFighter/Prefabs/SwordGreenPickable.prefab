@@ -11,7 +11,9 @@ GameObject:
   - component: {fileID: 3362812643875986718}
   - component: {fileID: 1802785503299539643}
   - component: {fileID: 4530674641382172273}
-  m_Layer: 0
+  - component: {fileID: 8533469616240656799}
+  - component: {fileID: 589549310}
+  m_Layer: 13
   m_Name: SwordGreenPickable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,9 +27,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2729406657147422628}
-  m_LocalRotation: {x: -0.56454027, y: 0.21270682, z: 0.5915982, w: 0.53484744}
+  m_LocalRotation: {x: 0.56454045, y: -0.21270956, z: -0.5915967, w: -0.5348478}
   m_LocalPosition: {x: 1, y: 0.407, z: 0.451}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2533966, y: 2.3062978, z: 1.2681144}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -81,3 +83,30 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &8533469616240656799
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2729406657147422628}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.23984706, y: 0.89426315, z: 0.20810626}
+  m_Center: {x: -0.001828183, y: 0.45570958, z: -0.022735538}
+--- !u!114 &589549310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2729406657147422628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63d7c9d6dda265343927eac8da09b5d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentType: 8
+  value: 0
