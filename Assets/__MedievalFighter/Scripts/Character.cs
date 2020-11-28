@@ -53,7 +53,20 @@ public class Character : MonoBehaviour
                     Destroy(other.gameObject);
                     Debug.Log("Green");
                     break;
-          
+                case PickType.Health:
+                    currentHealth += temp.value;
+                    GameManager.Instance.UpdateHealth();
+                    Debug.Log("avige guli"+temp.value);
+                    Destroy(other.gameObject);
+                    break;
+                case PickType.fakeHealth:
+                    currentHealth -= temp.value;
+                    GameManager.Instance.UpdateHealth();
+                    Debug.Log("avige cudi guli" + temp.value);
+                    Destroy(other.gameObject);
+                    break;
+
+
             }
         }
     }
