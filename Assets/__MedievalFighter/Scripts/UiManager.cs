@@ -20,5 +20,7 @@ public class UiManager : MonoBehaviour
         healthIMG.fillAmount = 1-((totalHealth - newHealth) / totalHealth);
     }
 
-   
+    private void Start() {
+       // healthIMG = 17;
+    }
 }

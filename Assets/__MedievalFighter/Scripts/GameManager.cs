@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
     [Space(30)]
     public List<InventoryButton> buttons;
 
-
+    public PlayerController playerController;
     public Data gameData;
     public int CoinsAmount {
         get
@@ -60,6 +60,8 @@ public class GameManager : MonoBehaviour
 
 
     void Start() {
+
+        //ui_manager.healthIMG();
         currentWeapon = weapons[Random.Range(0, weapons.Count)];
         LoadNextLevel();
         ui_manager = GetComponent<UiManager>();

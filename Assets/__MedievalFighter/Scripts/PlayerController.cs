@@ -29,17 +29,21 @@ public class PlayerController : MonoBehaviour
     }
 
 
+
+    public bool leftBtnIsPressed = false;
+    public bool rightBtnIsPressed = false;
+
     void Update()
     {
         
-        if(Input.GetKey(KeyCode.A))
+        if(Input.GetKey(KeyCode.A) || leftBtnIsPressed)
         {
             PlayerRb.velocity = new Vector3(-PlayerSpeed, 0f, 0f);
             PlayerAnim.SetTrigger(Constants.MoveAnimTrig);
             PlayerAnim.ResetTrigger(Constants.IdleAnimTrig);
             transform.eulerAngles = new Vector3(transform.eulerAngles.x,90, transform.eulerAngles.z);
         }
-        else if(Input.GetKey(KeyCode.D))
+        else if(Input.GetKey(KeyCode.D) || rightBtnIsPressed)
         {
             PlayerRb.velocity = new Vector3(PlayerSpeed, 0f, 0f);
             PlayerAnim.SetTrigger(Constants.MoveAnimTrig);
@@ -56,16 +60,24 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            PlayerAnim.SetTrigger(Constants.AttackAnimTrig);
-            PlayerAnim.ResetTrigger(Constants.IdleAnimTrig);
-            PlayerAnim.ResetTrigger(Constants.MoveAnimTrig);
+            //Attack();
         }
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            PlayerAnim.SetTrigger(Constants.JumpAnimTrig);
-            PlayerAnim.ResetTrigger(Constants.IdleAnimTrig);
-            PlayerAnim.ResetTrigger(Constants.MoveAnimTrig);
+         #if UNITY_EDITOR
+            Jump();
+         #endif
         }
+    }
+    public void Jump() {
+        PlayerAnim.SetTrigger(Constants.JumpAnimTrig);
+        PlayerAnim.ResetTrigger(Constants.IdleAnimTrig);
+        PlayerAnim.ResetTrigger(Constants.MoveAnimTrig);
+    }
+    public void Attack() {
+        PlayerAnim.SetTrigger(Constants.AttackAnimTrig);
+        PlayerAnim.ResetTrigger(Constants.IdleAnimTrig);
+        PlayerAnim.ResetTrigger(Constants.MoveAnimTrig);
     }
 
     private void OnCollisionEnter(Collision collision)
