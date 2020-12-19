@@ -1516,6 +1516,10 @@ MonoBehaviour:
     healthValue: 0
     itemAmount: 0
     myButtonState: 3
+  gameData:
+    coinsAmount: 0
+    currentHealthAmount: 0
+    lvlID: 0
 --- !u!4 &1676129618
 Transform:
   m_ObjectHideFlags: 0
@@ -1545,9 +1549,9 @@ MonoBehaviour:
   coinsAmountTxt: {fileID: 1130403692}
   healthIMG: {fileID: 1880422304}
   buttonSprites:
-    redSwordSprite: {fileID: 21300000, guid: 996e49e5a55d03d49ad6c82ab8375380, type: 3}
-    greenSwordSprite: {fileID: 21300000, guid: 6d5a9089045b9cc43b72da7cd9e24e00, type: 3}
-    healthSprite: {fileID: 21300000, guid: a8486d59307c2914eb4bc170bea73235, type: 3}
+  - {fileID: 21300000, guid: 996e49e5a55d03d49ad6c82ab8375380, type: 3}
+  - {fileID: 21300000, guid: 6d5a9089045b9cc43b72da7cd9e24e00, type: 3}
+  - {fileID: 21300000, guid: a8486d59307c2914eb4bc170bea73235, type: 3}
 --- !u!1 &1750763277
 GameObject:
   m_ObjectHideFlags: 0

@@ -31,15 +31,15 @@ public class Character : MonoBehaviour
                     Destroy(other.gameObject);
                     break;
                 case PickType.RedSwordUI:
-                    GameManager.Instance.AddToInventory(GameManager.buttonState.REDSWORD,GameManager.Instance.ui_manager.buttonSprites.redSwordSprite,temp.value);
+                    GameManager.Instance.AddToInventory(GameManager.buttonState.REDSWORD,GameManager.Instance.ui_manager.buttonSprites[0],temp.value);
                     Destroy(other.gameObject);
                     break;
                 case PickType.GreenSwordUI:
-                    GameManager.Instance.AddToInventory(GameManager.buttonState.GREENSWORD, GameManager.Instance.ui_manager.buttonSprites.greenSwordSprite, temp.value);
+                    GameManager.Instance.AddToInventory(GameManager.buttonState.GREENSWORD, GameManager.Instance.ui_manager.buttonSprites[1], temp.value);
                     Destroy(other.gameObject);
                     break;
                 case PickType.HealthUI:
-                    GameManager.Instance.AddToInventory(GameManager.buttonState.HEALTH, GameManager.Instance.ui_manager.buttonSprites.healthSprite, temp.value);
+                    GameManager.Instance.AddToInventory(GameManager.buttonState.HEALTH, GameManager.Instance.ui_manager.buttonSprites[2], temp.value);
                     Destroy(other.gameObject);
                     break;
                 case PickType.FakeHealth:

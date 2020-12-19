@@ -64,6 +64,9 @@ public class GameManager : MonoBehaviour
         LoadNextLevel();
         ui_manager = GetComponent<UiManager>();
         gameData = new Data();
+        inventoryList = new List<InventoryData>();
+
+        LoadGameInformation();
     }
 
 
@@ -111,13 +114,13 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-    public void AddToInventory(buttonState state, Sprite buttonSprite, float healthAmount) {
+    public void AddToInventory(buttonState state, Sprite buttonSprite, float value) {
         for (int i = 0; i != buttons.Count; i++) {                     //amas rame movuxerxot
             for (int a = 0; a != buttons.Count; a++) {
-                if (buttons[a].isAvialable == true && buttons[a].myButtonState == state && buttons[a].itemAmount > 0 && healthAmount == buttons[a].healthValue) {
+                if (buttons[a].isAvialable == true && buttons[a].myButtonState == state && buttons[a].itemAmount > 0 && value == buttons[a].healthValue) {
                     buttons[a].itemAmount += 1;
                     buttons[a].totalAmountTxt.text = buttons[a].itemAmount.ToString();
-                    buttons[a].healthValue = healthAmount;
+                    buttons[a].healthValue = value;
                     return;
                 }
             }
@@ -131,11 +134,40 @@ public class GameManager : MonoBehaviour
                 buttons[i].Btn.GetComponent<Image>().color = temp;
                 buttons[i].itemAmount += 1;
                 buttons[i].totalAmountTxt.text = buttons[i].itemAmount.ToString();
-                buttons[i].healthValue = healthAmount;
+                buttons[i].healthValue = value;
+
+
+
                 return;
 
             }
+        }
 
+    }
+    public void AddToInventory(buttonState state, Sprite buttonSprite, float value, bool isSync) {
+        for (int i = 0; i != buttons.Count; i++) {                     //amas rame movuxerxot
+            for (int a = 0; a != buttons.Count; a++) {
+                if (buttons[a].isAvialable == true && buttons[a].myButtonState == state && buttons[a].itemAmount > 0 && value == buttons[a].healthValue) {
+                    buttons[a].itemAmount += 1;
+                    buttons[a].totalAmountTxt.text = buttons[a].itemAmount.ToString();
+                    buttons[a].healthValue = value;
+                    return;
+                }
+            }
+            if (buttons[i].isAvialable == false) {
+                Color temp = buttons[i].Btn.GetComponent<Image>().color;
+                temp = new Color(temp.r, temp.g, temp.b, 1f);
+                Debug.Log(buttons[i].isAvialable);
+                buttons[i].isAvialable = true;
+                buttons[i].myButtonState = state;
+                buttons[i].Btn.GetComponent<Image>().sprite = buttonSprite;
+                buttons[i].Btn.GetComponent<Image>().color = temp;
+                buttons[i].itemAmount += 1;
+                buttons[i].totalAmountTxt.text = buttons[i].itemAmount.ToString();
+                buttons[i].healthValue = value;
+                return;
+
+            }
         }
     }
 
@@ -160,6 +192,10 @@ public class GameManager : MonoBehaviour
             LoadNextLevel();
         }
 
+    }
+
+    private void OnApplicationQuit() {
+        CheckSave();
     }
 
 
@@ -201,6 +237,10 @@ public class GameManager : MonoBehaviour
         public buttonState myButtonState;
     }
 
+
+    [SerializeField]
+    public List<InventoryData> inventoryList;
+
     [System.Serializable]
     public enum buttonState
     {
@@ -214,6 +254,7 @@ public class GameManager : MonoBehaviour
         public int coinsAmount;
         public float currentHealthAmount;
         public int lvlID;
+        public List<InventoryData> inventoryData;
         //racewereba araaq mnishvneloba
     }
 
@@ -223,16 +264,26 @@ public class GameManager : MonoBehaviour
         gameData.coinsAmount = 666;
         gameData.currentHealthAmount = 111;
         gameData.lvlID = 17;
-
+        SaveInventory();
         SaveGameInformation();
     }
+    private void SaveInventory() {
 
-    
+        for (int i = 0; i < buttons.Count; i++) {
+            InventoryData tmp = new InventoryData();
+            tmp.state = buttons[i].myButtonState;
+            tmp.amount = (int)buttons[i].itemAmount;
+            inventoryList.Add(tmp);
+        }
+        gameData.inventoryData = inventoryList;
+    }
+
+
 
 
     public void SaveGameInformation() {
         XmlSerializer xmlSer = new XmlSerializer(typeof(Data));
-        using (StringWriter sw= new StringWriter()) {
+        using (StringWriter sw = new StringWriter()) {
             xmlSer.Serialize(sw, gameData);
             // Debug.Log(sw.ToString());
             PlayerPrefs.SetString("Data", sw.ToString());
@@ -244,15 +295,36 @@ public class GameManager : MonoBehaviour
     public void LoadGameInformation() {
         XmlSerializer xmlSer = new XmlSerializer(typeof(Data));
         string entireText = PlayerPrefs.GetString("Data");
-        if (entireText.Length==0) {
+        if (entireText.Length == 0) {
             gameData = new Data();
         }
         else {
-            using(var reader=new System.IO.StringReader(entireText)) {
+            using (var reader = new System.IO.StringReader(entireText)) {
                 gameData = xmlSer.Deserialize(reader) as Data;
             }
         }
+        SyncInventoryFromDataBase();
 
-        Debug.Log(gameData.coinsAmount + "------" + gameData.currentHealthAmount + "health            " + gameData.lvlID);
+
+    }
+
+    public void SyncInventoryFromDataBase() {
+        if (gameData.inventoryData == null)
+            return;
+
+        for (int i = 0; i < gameData.inventoryData.Count; i++) {
+            for (int k = 0; k < gameData.inventoryData[i].amount; k++) {
+                AddToInventory(gameData.inventoryData[i].state, ui_manager.buttonSprites[(int)gameData.inventoryData[i].state], gameData.inventoryData[i].amount, true);
+            }
+        }
+        //AddToInventory();
+    }
+
+
+    [System.Serializable]
+    public class InventoryData
+    {
+        public int amount;
+        public buttonState state;
     }
 }
