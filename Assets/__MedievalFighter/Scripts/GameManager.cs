@@ -36,6 +36,8 @@ public class GameManager : MonoBehaviour
     [Space(30)]
     public List<InventoryButton> buttons;
 
+    public SoundController _soundController;
+
     public PlayerController playerController;
     public Data gameData;
     public int CoinsAmount {

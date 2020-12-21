@@ -24,6 +24,7 @@ public class Character : MonoBehaviour
             switch (type) {
                 case PickType.Coin:
                     GameManager.Instance.CoinsAmount=temp.value;
+                    GameManager.Instance._soundController.PlaySound(GameManager.Instance._soundController.testSound);
                     Destroy(other.gameObject);
                     break;
                 case PickType.Gem:
