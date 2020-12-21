@@ -56,6 +56,7 @@ public class Character : MonoBehaviour
 
     public void ChangeHealthValue(float amount,bool wantToIncrease) {
         currentHealth = wantToIncrease ? currentHealth + amount : currentHealth - amount;
+        GameManager.Instance.gameData.currentHealthAmount = currentHealth;
         GameManager.Instance.UpdateHealth();
     }
 

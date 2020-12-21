@@ -1989,6 +1989,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myCharacter: {fileID: 1196939907}
+  camHolder: {fileID: 1830555305}
+  camOffset: 15
   ui_manager: {fileID: 0}
   levelInfo:
   - {fileID: 11400000, guid: 88aef56d101e1a04aa22a7d214fd11df, type: 2}
@@ -2055,8 +2057,12 @@ MonoBehaviour:
     myButtonState: 3
   playerController: {fileID: 293191980}
   gameData:
+    isFirstRun: 0
     coinsAmount: 0
     currentHealthAmount: 0
+    xPos: 0
+    yPos: 0
+    zPos: 0
     lvlID: 0
     inventoryData: []
   inventoryList: []

@@ -12,6 +12,12 @@ public class GameManager : MonoBehaviour
 {
     [Header("References")]
     public Character myCharacter;
+    public GameObject camHolder;
+
+    [Header("Properties")]
+    public float camOffset;
+
+
     [HideInInspector]
     public UiManager ui_manager;
     public List<LevelData> levelInfo;
@@ -197,6 +203,19 @@ public class GameManager : MonoBehaviour
     }
 
     private void OnApplicationQuit() {
+        gameData.isFirstRun = true;
+
+        //Position
+        gameData.xPos = myCharacter.transform.position.x;
+        gameData.yPos = myCharacter.transform.position.y;
+        gameData.zPos = myCharacter.transform.position.z;
+
+        //Health
+        gameData.currentHealthAmount = myCharacter.currentHealth;
+
+        //Coins
+        gameData.coinsAmount = CoinsAmount;
+
         CheckSave();
     }
 
@@ -253,8 +272,10 @@ public class GameManager : MonoBehaviour
     [System.Serializable]
     public class Data
     {
+        public bool isFirstRun;
         public int coinsAmount;
         public float currentHealthAmount;
+        public float xPos, yPos, zPos;
         public int lvlID;
         public List<InventoryData> inventoryData;
         //racewereba araaq mnishvneloba
@@ -263,9 +284,9 @@ public class GameManager : MonoBehaviour
 
     [ContextMenu("SaveChecker")]
     public void CheckSave() {
-        gameData.coinsAmount = 666;
-        gameData.currentHealthAmount = 111;
-        gameData.lvlID = 17;
+        //gameData.coinsAmount = 666;
+        //gameData.currentHealthAmount = 111;
+        //gameData.lvlID = 17;
         SaveInventory();
         SaveGameInformation();
     }
@@ -306,7 +327,27 @@ public class GameManager : MonoBehaviour
             }
         }
         SyncInventoryFromDataBase();
+        SyncData();
 
+    }
+
+    public void SyncData()
+    {
+        if(gameData.isFirstRun)
+        {
+            //position
+            Vector3 temp = new Vector3(gameData.xPos, gameData.yPos, gameData.zPos);
+            myCharacter.transform.position = temp;
+            camHolder.transform.position = new Vector3(myCharacter.transform.position.x+camOffset, camHolder.transform.position.y, camHolder.transform.position.z);
+
+            //Health
+            myCharacter.currentHealth = gameData.currentHealthAmount;
+            UpdateHealth();
+
+            //Coins
+            CoinsAmount = gameData.coinsAmount;
+
+        }
 
     }
 
