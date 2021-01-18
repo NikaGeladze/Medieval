@@ -58,6 +58,7 @@ public class EnemyController : MonoBehaviour
 
     public void Death()
     {
+
         //Destroy(gameObject);
         regdoll.SetActive(true);
         regdoll.transform.SetParent(null);
