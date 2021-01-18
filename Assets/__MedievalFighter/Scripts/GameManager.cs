@@ -7,15 +7,18 @@ using System.Xml;
 using System.Xml.Serialization;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     [Header("References")]
     public Character myCharacter;
     public GameObject camHolder;
+    public GameObject arrow;
 
     [Header("Properties")]
     public float camOffset;
+    public float gameOverDelay = 2.5f;
 
 
     [HideInInspector]
@@ -40,6 +43,8 @@ public class GameManager : MonoBehaviour
 
     public PlayerController playerController;
     public Data gameData;
+
+    public bool gameActive { get; private set; }
     public int CoinsAmount {
         get
         {
@@ -79,6 +84,12 @@ public class GameManager : MonoBehaviour
         LoadGameInformation();
     }
 
+    public void StartGame()
+    {
+        gameActive = true;
+        camHolder.GetComponent<CameraController2>().StartRotation(false);
+        ui_manager.StartGame();
+    }
 
     void GetRandomColor() {
         LevelData currentData = levelInfo[Random.Range(0, levelInfo.Count)];
@@ -94,6 +105,11 @@ public class GameManager : MonoBehaviour
         GetRandomColor();
     }
 
+    public void GameOver()
+    {
+        gameActive = false;
+        Invoke("HardRestart", gameOverDelay);
+    }
 
     public void ButtonClicked(int buttonID) {
         if (!buttons[buttonID].isAvialable) {
@@ -194,6 +210,7 @@ public class GameManager : MonoBehaviour
         return finalResult;
     }
 
+
     public void UpdateHealth() {
         ui_manager.ChangeHealthUI(myCharacter.currentHealth);
     }
@@ -205,7 +222,7 @@ public class GameManager : MonoBehaviour
     }
 
     private void OnApplicationQuit() {
-        gameData.isFirstRun = true;
+        gameData.isFirstRun = false;
 
         //Position
         gameData.xPos = myCharacter.transform.position.x;
@@ -219,6 +236,11 @@ public class GameManager : MonoBehaviour
         gameData.coinsAmount = CoinsAmount;
 
         CheckSave();
+    }
+
+    public void HardRestart()
+    {
+        SceneManager.LoadScene(0);
     }
 
 
@@ -274,7 +296,7 @@ public class GameManager : MonoBehaviour
     [System.Serializable]
     public class Data
     {
-        public bool isFirstRun;
+        public bool isFirstRun = true;
         public int coinsAmount;
         public float currentHealthAmount;
         public float xPos, yPos, zPos;
@@ -335,12 +357,14 @@ public class GameManager : MonoBehaviour
 
     public void SyncData()
     {
-        if(gameData.isFirstRun)
+        if(gameData.xPos + gameData.yPos + gameData.zPos != 0)
         {
             //position
+            /*
             Vector3 temp = new Vector3(gameData.xPos, gameData.yPos, gameData.zPos);
             myCharacter.transform.position = temp;
             camHolder.transform.position = new Vector3(myCharacter.transform.position.x+camOffset, camHolder.transform.position.y, camHolder.transform.position.z);
+            */
 
             //Health
             myCharacter.currentHealth = gameData.currentHealthAmount;

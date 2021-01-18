@@ -5,9 +5,36 @@ using UnityEngine.UI;
 
 public class UiManager : MonoBehaviour
 {
-    public Text coinsAmountTxt;
-    public Image healthIMG;
     public Sprite[] buttonSprites;
+
+    [SerializeField]private GameObject InGamePanel;
+    [SerializeField]private GameObject StartPanel;
+    [SerializeField]private Text coinsAmountTxt;
+    [SerializeField]private Image healthIMG;
+
+    private void Start()
+    {
+        if(GameManager.Instance.gameData.isFirstRun)
+        {
+            StartPanel.SetActive(true);
+        }
+        else
+        {
+            GameManager.Instance.StartGame();
+            StartPanel.SetActive(false);
+            InGamePanel.SetActive(true);
+        }
+    }
+
+    public void StartGame()
+    {
+        StartPanel.SetActive(false);
+    }
+
+    public void RotationFinished()
+    {
+        InGamePanel.SetActive(true);
+    }    
 
     public void AddCoin(int coinAmount) {
         coinsAmountTxt.text = coinAmount.ToString();
@@ -20,7 +47,5 @@ public class UiManager : MonoBehaviour
         healthIMG.fillAmount = 1-((totalHealth - newHealth) / totalHealth);
     }
 
-    private void Start() {
-       // healthIMG = 17;
-    }
+ 
 }

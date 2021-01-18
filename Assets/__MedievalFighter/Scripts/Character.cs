@@ -59,6 +59,7 @@ public class Character : MonoBehaviour
         currentHealth = wantToIncrease ? currentHealth + amount : currentHealth - amount;
         GameManager.Instance.gameData.currentHealthAmount = currentHealth;
         GameManager.Instance.UpdateHealth();
+        if(0 >= currentHealth) GameManager.Instance.playerController.Death();
     }
 
     public void ChangeSword(bool red)
@@ -74,6 +75,14 @@ public class Character : MonoBehaviour
             mySwords[2].SetActive(true);
             mySwords[0].SetActive(false);
             mySwords[1].SetActive(false);
+        }
+    }
+
+    public void DeactivateAllSwords()
+    {
+        for(int i = 0;i != mySwords.Length;i++)
+        {
+            mySwords[i].SetActive(false);
         }
     }
 }

@@ -10,6 +10,12 @@ TagManager:
   - PlayerAttack
   - EnemyAttack
   - Dash
+  - Spike
+  - ActualSpike
+  - Archer
+  - Arrow
+  - ArcherDetection
+  - ArcherDetaction
   layers:
   - Default
   - TransparentFX
@@ -25,9 +31,9 @@ TagManager:
   - Character
   - PlayerAttackTrig
   - Pickable
-  - 
-  - 
-  - 
+  - Archer
+  - ArcherRagdoll
+  - ArcherDetection
   - 
   - 
   - 

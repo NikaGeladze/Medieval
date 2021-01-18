@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using DG.Tweening;
+using DG.Tweening;
 
 public class CameraController2 : MonoBehaviour
 {
@@ -12,6 +12,8 @@ public class CameraController2 : MonoBehaviour
     public float lerpSpeed;
     public bool followX, followY, followZ;
     public bool canFollow = true;
+    public float FirstYRotation = 8;
+    public float FirstRotationDuration = 1.5f;
     private Vector3 offSet;
     private Vector3 firstPos;
     private Vector3 newPos;
@@ -25,7 +27,10 @@ public class CameraController2 : MonoBehaviour
         newPos = transform.position;
         mainCam = transform.GetChild(0).gameObject;
         startOffset = offSet;
-
+        if(!GameManager.Instance.gameData.isFirstRun)
+        {
+            StartRotation(true);
+        }
     }
     private void LateUpdate()
     {
@@ -35,6 +40,21 @@ public class CameraController2 : MonoBehaviour
         }
     }
 
+    public void StartRotation(bool instantly)
+    {
+        float yRotation = FirstYRotation;
+        Vector3 rotationAngle = new Vector3(transform.rotation.eulerAngles.x, yRotation, transform.rotation.eulerAngles.z);
+        if (instantly)
+        {
+            transform.rotation = Quaternion.Euler(rotationAngle);
+        }
+        else
+        {
+            transform.DORotate(rotationAngle, FirstRotationDuration).OnComplete(() => {
+                GameManager.Instance.ui_manager.RotationFinished();
+            });
+        }       
+    }
 
     private void FollowTarget()
     {
