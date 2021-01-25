@@ -16,6 +16,8 @@ TagManager:
   - Arrow
   - ArcherDetection
   - ArcherDetaction
+  - FinishStart
+  - FinishEnd
   layers:
   - Default
   - TransparentFX

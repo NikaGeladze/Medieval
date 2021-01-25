@@ -14,6 +14,13 @@ public class CameraController2 : MonoBehaviour
     public bool canFollow = true;
     public float FirstYRotation = 8;
     public float FirstRotationDuration = 1.5f;
+
+    [Space(10)]
+    [Header("Finish Properties")]
+    public Vector3 finishCamRotation;
+    public Transform finishCamPos;
+    public float finishCamRotationDuration = 1.5f;
+
     private Vector3 offSet;
     private Vector3 firstPos;
     private Vector3 newPos;
@@ -21,6 +28,8 @@ public class CameraController2 : MonoBehaviour
     private float startCamY;
     private bool resetYPos = false;
     private Vector3 startOffset;
+    private bool isAlreadyActivated = false;
+
     private void Start() {
         offSet = target.position - transform.position;
         firstPos = target.position - offSet;
@@ -94,6 +103,16 @@ public class CameraController2 : MonoBehaviour
         else
         {
             newPos.z = Mathf.Lerp(newPos.z, firstPos.z, lerpSpeed);
+        }
+    }
+
+    public void Finish()
+    {
+        if (!isAlreadyActivated)
+        {
+            Camera.main.transform.DOMove(finishCamPos.position, finishCamRotationDuration);
+            Camera.main.transform.DORotate(finishCamRotation, finishCamRotationDuration);
+            isAlreadyActivated = true;
         }
     }
 

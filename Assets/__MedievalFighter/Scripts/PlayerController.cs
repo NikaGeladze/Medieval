@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public Rigidbody PlayerRb;
 
     public float PlayerSpeed = 5f;
+    public float PlayerFinishSpeed = 3.5f;
     public float PlayerShieldedSpeed = 2.5f;
     public float shieldDuration = 3.5f;
     public float shieldCoolDown = 1.5f;
@@ -45,7 +46,15 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (!GameManager.Instance.gameActive) return;
+
+        if (!GameManager.Instance.gameActive)
+        {
+            PlayerRb.velocity = new Vector3(PlayerSpeed, 0f, 0f);
+            PlayerAnim.SetTrigger(Constants.RunAnimTrig);
+            PlayerAnim.ResetTrigger(Constants.IdleAnimTrig);
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, -90, transform.eulerAngles.z);
+            return;
+        }
 
         if (Input.GetKey(KeyCode.A) || leftBtnIsPressed)
         {
@@ -146,6 +155,21 @@ public class PlayerController : MonoBehaviour
         {
             other.gameObject.transform.parent.GetComponent<ArcherController>().PlayerDetected();
         }
+        if(other.gameObject.CompareTag(Constants.FinishStartTag))
+        {
+            other.gameObject.GetComponent<Animator>().SetTrigger(Constants.OpenAnimTrig);
+            FinishStart();
+        }
+        if(other.gameObject.CompareTag(Constants.FinishEndTag))
+        {
+            other.transform.parent.gameObject.GetComponent<Animator>().SetTrigger(Constants.CloseAnimTrig);
+            GameManager.Instance.FinishEnd();
+        }
+    }
+
+    public void FinishStart()
+    {
+        GameManager.Instance.FinishStart();
     }
 
     public void Death()

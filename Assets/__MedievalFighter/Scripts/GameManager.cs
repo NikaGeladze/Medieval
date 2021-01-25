@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
     [Header("Properties")]
     public float camOffset;
     public float gameOverDelay = 2.5f;
+    public float nextLevelDelay = 1.5f;
+
 
 
     [HideInInspector]
@@ -108,7 +110,18 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         gameActive = false;
-        Invoke("HardRestart", gameOverDelay);
+        Invoke(Constants.HardRestartString, gameOverDelay);
+    }
+
+    public void FinishStart()
+    {
+        gameActive = false;
+        camHolder.GetComponent<CameraController2>().Finish();
+    }
+
+    public void FinishEnd()
+    {
+        Invoke(Constants.HardRestartString, nextLevelDelay);
     }
 
     public void ButtonClicked(int buttonID) {

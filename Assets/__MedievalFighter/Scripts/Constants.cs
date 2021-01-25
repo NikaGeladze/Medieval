@@ -4,6 +4,8 @@ using UnityEngine;
 
 public static class Constants 
 {
+    //Just Strings
+    public static string HardRestartString = "HardRestart";
 
     //Animations Section
 
@@ -14,6 +16,10 @@ public static class Constants
     public static string ArcherShootTrig = "Shoot";
     public static string ArcherIdleBool = "IsIdle";
     public static string AttackAnimTrig = "Attack";
+    public static string FinishStartTag = "FinishStart";
+    public static string FinishEndTag = "FinishEnd";
+    public static string OpenAnimTrig = "Open";
+    public static string CloseAnimTrig = "Close";
     public static string EnemyTag = "Enemy";
     public static string PlayerAttackTag = "PlayerAttack";
     public static string PlayerTag = "Player";
