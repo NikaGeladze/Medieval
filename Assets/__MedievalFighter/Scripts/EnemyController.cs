@@ -15,6 +15,8 @@ public class EnemyController : MonoBehaviour
 
     private Rigidbody rb;
 
+    private bool isAttacking = false;
+
     private void Start()
     {
         enemyAnimator.SetTrigger(Constants.IdleAnimTrig);
@@ -31,6 +33,9 @@ public class EnemyController : MonoBehaviour
 
     public void Attack()
     {
+        isAttacking = true;
+        enemyAnimator.ResetTrigger(Constants.DashTag);
+        enemyAnimator.ResetTrigger(Constants.IdleAnimTrig);
         enemyAnimator.SetTrigger(Constants.AttackAnimTrig);
     }
 
@@ -43,15 +48,16 @@ public class EnemyController : MonoBehaviour
     public void DeactivateCollision()
     {
         enemyAttackCollider.enabled= false;
+        isAttacking = false;
     }
 
     public void Dash(Transform playerPos)
     {
-        if (Enemytype == enemyType.DASH)
+        if (Enemytype == enemyType.DASH && ! isAttacking)
         {
             enemyAnimator.SetTrigger(Constants.DashTag);
 
-            rb.velocity = new Vector3(playerPos.position.x - transform.position.x,0,0);
+            rb.velocity = new Vector3(playerPos.position.x - transform.position.x, 0, 0);
         }
     }
 

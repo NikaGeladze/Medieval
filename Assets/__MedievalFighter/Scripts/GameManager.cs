@@ -78,18 +78,19 @@ public class GameManager : MonoBehaviour
 
         //ui_manager.healthIMG();
         currentWeapon = weapons[Random.Range(0, weapons.Count)];
-        LoadNextLevel();
         ui_manager = GetComponent<UiManager>();
         gameData = new Data();
         inventoryList = new List<InventoryData>();
 
+
         LoadGameInformation();
+        LoadNextLevel();
     }
 
     public void StartGame()
     {
         gameActive = true;
-        camHolder.GetComponent<CameraController2>().StartRotation(false);
+        camHolder.GetComponent<CameraController2>().StartRotation(/*false*/ true );
         ui_manager.StartGame();
     }
 
@@ -103,7 +104,7 @@ public class GameManager : MonoBehaviour
     }
     void LoadNextLevel() {
         Destroy(currentLvl);
-        currentLvl = Instantiate(levels[Random.Range(0, levels.Count)]);
+        currentLvl = Instantiate(levels[gameData.lvlID]);
         GetRandomColor();
     }
 
@@ -122,6 +123,9 @@ public class GameManager : MonoBehaviour
     public void FinishEnd()
     {
         Invoke(Constants.HardRestartString, nextLevelDelay);
+        gameData.lvlID++;
+        gameData.lvlID = Mathf.Clamp(gameData.lvlID, 0, levels.Count - 1);
+        CheckSave();
     }
 
     public void ButtonClicked(int buttonID) {
@@ -166,7 +170,7 @@ public class GameManager : MonoBehaviour
             if (buttons[i].isAvialable == false) {
                 Color temp = buttons[i].Btn.GetComponent<Image>().color;
                 temp = new Color(temp.r, temp.g, temp.b, 1f);
-                Debug.Log(buttons[i].isAvialable);
+                //Debug.Log(buttons[i].isAvialable);
                 buttons[i].isAvialable = true;
                 buttons[i].myButtonState = state;
                 buttons[i].Btn.GetComponent<Image>().sprite = buttonSprite;
@@ -196,7 +200,7 @@ public class GameManager : MonoBehaviour
             if (buttons[i].isAvialable == false) {
                 Color temp = buttons[i].Btn.GetComponent<Image>().color;
                 temp = new Color(temp.r, temp.g, temp.b, 1f);
-                Debug.Log(buttons[i].isAvialable);
+                //Debug.Log(buttons[i].isAvialable);
                 buttons[i].isAvialable = true;
                 buttons[i].myButtonState = state;
                 buttons[i].Btn.GetComponent<Image>().sprite = buttonSprite;

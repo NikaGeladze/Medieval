@@ -16,7 +16,8 @@ public class UiManager : MonoBehaviour
     {
         if(GameManager.Instance.gameData.isFirstRun)
         {
-            StartPanel.SetActive(true);
+            //StartPanel.SetActive(true);
+            GameManager.Instance.StartGame();
         }
         else
         {

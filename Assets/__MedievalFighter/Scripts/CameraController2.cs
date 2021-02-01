@@ -56,6 +56,7 @@ public class CameraController2 : MonoBehaviour
         if (instantly)
         {
             transform.rotation = Quaternion.Euler(rotationAngle);
+            GameManager.Instance.ui_manager.RotationFinished();
         }
         else
         {

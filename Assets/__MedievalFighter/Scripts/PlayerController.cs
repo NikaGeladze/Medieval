@@ -141,6 +141,7 @@ public class PlayerController : MonoBehaviour
         }
         if (other.gameObject.CompareTag(Constants.EnemyTag))
         {
+            Debug.Log("Enter");
             other.gameObject.GetComponent<EnemyController>().Attack();
         }
         if (other.gameObject.CompareTag(Constants.SpikeTag))
