@@ -7,6 +7,9 @@ public static class Constants
     //Just Strings
     public static string HardRestartString = "HardRestart";
 
+    //Shaders Properties
+    public static string ColorFillProp = "_ColorFill";
+
     //Animations Section
 
     public static string IdleAnimTrig = "Idle";

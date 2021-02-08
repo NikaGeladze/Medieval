@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class ArcherController : MonoBehaviour
 {
@@ -13,7 +14,8 @@ public class ArcherController : MonoBehaviour
 
     public GameObject myVisuals;
     public GameObject ragdoll;
-    public float ragdollVanishTime = 3;
+    public float ragdollVanishTime = 3f;
+    public float ragdollDissolveSpeed = 4f;
 
     public List<GameObject> arrows;
     private Animator archerAnimator;
@@ -85,6 +87,12 @@ public class ArcherController : MonoBehaviour
 
     public IEnumerator DestroyRagdoll()
     {
+        Material[] ragdollMats = ragdoll.transform.GetChild(3).GetComponent<SkinnedMeshRenderer>().materials;
+        foreach (Material ragdollMat in ragdollMats)
+        {
+            ragdollMat.DOFloat(1.1f, Constants.ColorFillProp, ragdollDissolveSpeed);
+        }
+
         yield return new WaitForSeconds(ragdollVanishTime);
 
         if (ragdoll != null)

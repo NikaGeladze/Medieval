@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class EnemyController : MonoBehaviour
 {
     public float damage;
+    public float ragdollDestroyDelay = 3f;
+    public float ragdollDissolveSpeed = 4f;
     public BoxCollider enemyAttackCollider;
     public Animator enemyAnimator;
     public enemyType Enemytype;
@@ -66,10 +69,35 @@ public class EnemyController : MonoBehaviour
     {
 
         //Destroy(gameObject);
+        StartCoroutine(SpawnRagdoll());
+    }
+
+    public IEnumerator SpawnRagdoll()
+    {
         regdoll.SetActive(true);
         regdoll.transform.SetParent(null);
-        middleSpine.AddForce(new Vector3(Random.Range(0,3), Random.Range(0, 3f), Random.Range(0, 3f)), ForceMode.Impulse);
-        Destroy(gameObject);
+        middleSpine.AddForce(new Vector3(Random.Range(0, 3), Random.Range(0, 3f), Random.Range(0, 3f)), ForceMode.Impulse);
+        ActivateRagdollShader();
+        DestroyMyself();
+        yield return new WaitForSeconds(ragdollDestroyDelay);
+        Destroy(regdoll);
+    }
+
+    public void ActivateRagdollShader()
+    {
+        Material ragdollMat = regdoll.transform.GetChild(1).GetComponent<SkinnedMeshRenderer>().material;
+        ragdollMat.DOFloat(1.1f, Constants.ColorFillProp, ragdollDissolveSpeed);
+    }
+
+    public void DestroyMyself()
+    {
+        foreach(Transform comp in gameObject.transform)
+        {
+            Destroy(comp.gameObject);
+        }
+        gameObject.GetComponent<CapsuleCollider>().enabled = false;
+        enemyAnimator.enabled = false;
+        rb.isKinematic = true;
     }
 
     public enum enemyType
