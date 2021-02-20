@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ObjectPooler : MonoBehaviour
 {
-
     public int objectCount;
     public GameObject bulletPrefab;
 
@@ -13,9 +12,6 @@ public class ObjectPooler : MonoBehaviour
             Instantiate(bulletPrefab, transform);
         }
     }
-
-
-
     public GameObject GetObject() {
         return transform.GetChild(0).gameObject;
     }

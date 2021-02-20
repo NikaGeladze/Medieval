@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviour
     public Data gameData;
 
     public bool gameActive { get; private set; }
+    public bool playerHasreachedTheFinish=false;
     public int CoinsAmount {
         get
         {
@@ -90,8 +91,7 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         gameActive = true;
-        camHolder.GetComponent<CameraController2>().StartRotation(/*false*/ true );
-        ui_manager.StartGame();
+        camHolder.GetComponent<CameraController2>().StartRotation(false);
     }
 
     void GetRandomColor() {

@@ -19,6 +19,7 @@ TagManager:
   - FinishStart
   - FinishEnd
   - Bullet
+  - Ground
   layers:
   - Default
   - TransparentFX

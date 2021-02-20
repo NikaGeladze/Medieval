@@ -10,6 +10,11 @@ public static class Constants
     //Shaders Properties
     public static string ColorFillProp = "_ColorFill";
 
+
+    //Tags
+    public static string Groundtag = "Ground";
+
+
     //Animations Section
 
     public static string IdleAnimTrig = "Idle";

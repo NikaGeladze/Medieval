@@ -14,28 +14,15 @@ public class UiManager : MonoBehaviour
 
     private void Start()
     {
-        if(GameManager.Instance.gameData.isFirstRun)
-        {
-            //StartPanel.SetActive(true);
-            GameManager.Instance.StartGame();
-        }
-        else
-        {
-            GameManager.Instance.StartGame();
-            StartPanel.SetActive(false);
-            InGamePanel.SetActive(true);
-        }
+        StartPanel.SetActive(true);
     }
 
-    public void StartGame()
-    {
-        StartPanel.SetActive(false);
-    }
 
     public void RotationFinished()
     {
         InGamePanel.SetActive(true);
-    }    
+        StartPanel.SetActive(false);
+    }
 
     public void AddCoin(int coinAmount) {
         coinsAmountTxt.text = coinAmount.ToString();

@@ -37,8 +37,8 @@ public class EnemyController : MonoBehaviour
     public void Attack()
     {
         isAttacking = true;
-        enemyAnimator.ResetTrigger(Constants.DashTag);
-        enemyAnimator.ResetTrigger(Constants.IdleAnimTrig);
+        //enemyAnimator.ResetTrigger(Constants.DashTag);
+        //enemyAnimator.ResetTrigger(Constants.IdleAnimTrig);
         enemyAnimator.SetTrigger(Constants.AttackAnimTrig);
     }
 
@@ -74,7 +74,7 @@ public class EnemyController : MonoBehaviour
 
     public IEnumerator SpawnRagdoll()
     {
-        regdoll.SetActive(true);
+        regdoll.SetActive(true);   //ToDo null refference Bug
         regdoll.transform.SetParent(null);
         middleSpine.AddForce(new Vector3(Random.Range(0, 3), Random.Range(0, 3f), Random.Range(0, 3f)), ForceMode.Impulse);
         ActivateRagdollShader();

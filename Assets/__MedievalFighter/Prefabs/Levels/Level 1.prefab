@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 726167113}
   - component: {fileID: 726167116}
   - component: {fileID: 726167115}
-  - component: {fileID: 726167114}
   m_Layer: 0
   m_Name: Ground 05 Grey (17)
   m_TagString: Untagged
@@ -82,19 +81,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &726167114
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 726167112}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 4, y: 4.000001, z: 0.6850612}
-  m_Center: {x: 0, y: 0, z: -0.3425306}
 --- !u!1 &957985623
 GameObject:
   m_ObjectHideFlags: 0
@@ -377,7 +363,6 @@ GameObject:
   - component: {fileID: 1410674420}
   - component: {fileID: 1410674423}
   - component: {fileID: 1410674422}
-  - component: {fileID: 1410674421}
   m_Layer: 0
   m_Name: Ground 05 Grey (16)
   m_TagString: Untagged
@@ -448,19 +433,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1410674421
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1410674419}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 4, y: 4.000001, z: 0.6850612}
-  m_Center: {x: 0, y: 0, z: -0.3425306}
 --- !u!1 &1474493228
 GameObject:
   m_ObjectHideFlags: 0
@@ -472,7 +444,6 @@ GameObject:
   - component: {fileID: 1474493229}
   - component: {fileID: 1474493232}
   - component: {fileID: 1474493231}
-  - component: {fileID: 1474493230}
   m_Layer: 0
   m_Name: Ground 05 Grey (15)
   m_TagString: Untagged
@@ -543,19 +514,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1474493230
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1474493228}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 4, y: 4.000001, z: 0.6850612}
-  m_Center: {x: 0, y: 0, z: -0.3425306}
 --- !u!1 &34514648897467961
 GameObject:
   m_ObjectHideFlags: 0
@@ -1772,7 +1730,7 @@ GameObject:
   - component: {fileID: 5554611759266054432}
   m_Layer: 0
   m_Name: Level 1
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

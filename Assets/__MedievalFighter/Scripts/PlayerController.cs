@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
 
     private bool isShielded = false;
     private float PlayerInitSpeed;
-
+    private bool isAttacking=false;
     private void Start() {
         InitValuesAndComponenets();
     }
@@ -40,14 +40,15 @@ public class PlayerController : MonoBehaviour
     }
 
 
-
+    public float jumpStrength;
     public bool leftBtnIsPressed = false;
     public bool rightBtnIsPressed = false;
+    public bool isGrounded;
 
     void Update()
     {
 
-        if (!GameManager.Instance.gameActive)
+        if (GameManager.Instance.playerHasreachedTheFinish)
         {
             PlayerRb.velocity = new Vector3(PlayerSpeed, 0f, 0f);
             PlayerAnim.SetTrigger(Constants.RunAnimTrig);
@@ -102,18 +103,27 @@ public class PlayerController : MonoBehaviour
         }
     }
     public void Jump() {
-        PlayerAnim.SetTrigger(Constants.JumpAnimTrig);
-        PlayerAnim.ResetTrigger(Constants.IdleAnimTrig);
-        PlayerAnim.ResetTrigger(Constants.RunAnimTrig);
+        if (isGrounded) {
+            PlayerAnim.SetTrigger(Constants.JumpAnimTrig);
+            PlayerRb.AddForce(Vector3.up * jumpStrength, ForceMode.Impulse);
+        }
     }
     public void Attack() {
-        PlayerAnim.SetTrigger(Constants.AttackAnimTrig);
-        PlayerAnim.ResetTrigger(Constants.IdleAnimTrig);
-        PlayerAnim.ResetTrigger(Constants.RunAnimTrig);
+        if (!isAttacking) {
+            PlayerAnim.SetTrigger(Constants.AttackAnimTrig);
+            isAttacking = true;
+        }
     }
-
+    private void OnCollisionExit(Collision collision) {
+        if (collision.transform.CompareTag(Constants.Groundtag)) {
+            isGrounded = false;
+        }
+    }
     private void OnCollisionEnter(Collision collision)
     {
+        if (collision.transform.CompareTag(Constants.Groundtag)) {
+            isGrounded = true;
+        }
         if(collision.gameObject.CompareTag("Reset"))
         {
             Debug.Log("Reset");
@@ -158,6 +168,7 @@ public class PlayerController : MonoBehaviour
         }
         if(other.gameObject.CompareTag(Constants.FinishStartTag))
         {
+            GameManager.Instance.playerHasreachedTheFinish = true;
             other.gameObject.GetComponent<Animator>().SetTrigger(Constants.OpenAnimTrig);
             FinishStart();
         }
@@ -250,6 +261,7 @@ public class PlayerController : MonoBehaviour
     public void DeactivateCollision()
     {
         playerAttack.DeactivateCollision();
+        isAttacking = false;
     }
    
 

@@ -36,10 +36,7 @@ public class CameraController2 : MonoBehaviour
         newPos = transform.position;
         mainCam = transform.GetChild(0).gameObject;
         startOffset = offSet;
-        if(!GameManager.Instance.gameData.isFirstRun)
-        {
-            StartRotation(true);
-        }
+     
     }
     private void LateUpdate()
     {
