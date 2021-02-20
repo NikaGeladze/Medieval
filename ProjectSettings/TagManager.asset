@@ -18,7 +18,6 @@ TagManager:
   - ArcherDetaction
   - FinishStart
   - FinishEnd
-  - Bullet
   layers:
   - Default
   - TransparentFX
